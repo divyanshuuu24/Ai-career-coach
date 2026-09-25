@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Learning Roadmap — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container" style="max-width: 900px;">
+    <div class="text-center mb-5">
+      <span class="hero-badge bg-light border" style="background:#eef2ff !important;color:var(--primary)!important;">Step 3 of 3</span>
+      <h2 class="section-title mt-3">Your 6-Month Roadmap to <span class="text-gradient">{{ career.career_name }}</span></h2>
+      <p class="section-subtitle mx-auto">A week-by-week plan with focused skills, certifications, and mini-projects.</p>
+    </div>
+
+    <div class="roadmap-timeline">
+      {% for month in roadmap.months %}
+      <div class="roadmap-month">
+        <div class="glass-card p-4 animate-on-scroll">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <div>
+              <span class="badge bg-primary-subtle text-primary mb-2">Month {{ month.month }} · {{ month.theme }}</span>
+              <h5 class="fw-bold mb-1">Focus: {{ month.target_skill }}</h5>
+            </div>
+            <span class="badge badge-priority-{{ month.priority|lower }}">{{ month.priority }} Priority</span>
+          </div>
+
+          <div class="row g-3 mt-1 mb-3">
+            <div class="col-md-6 small"><i class="bi bi-patch-check text-success me-1"></i><strong>Certification:</strong> {{ month.recommended_certification }}</div>
+            <div class="col-md-6 small"><i class="bi bi-kanban text-primary me-1"></i><strong>Mini Project:</strong> {{ month.mini_project }}</div>
+          </div>
+
+          <div class="accordion" id="weekAccordion{{ month.month }}">
+            {% for week in month.weeks %}
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed small fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#week{{ month.month }}{{ week.week }}">
+                  Week {{ week.week }}: {{ week.focus }}
+                </button>
+              </h2>
+              <div id="week{{ month.month }}{{ week.week }}" class="accordion-collapse collapse" data-bs-parent="#weekAccordion{{ month.month }}">
+                <div class="accordion-body small text-muted">
+                  Recommended resources: {{ week.resources|join(', ') }}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary-custom px-4"><i class="bi bi-speedometer2 me-1"></i>Go to Dashboard</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

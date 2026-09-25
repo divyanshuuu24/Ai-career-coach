@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}About — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container text-center">
+    <h1 class="fw-bold">About AI Career Coach</h1>
+    <p class="fs-5 opacity-75 mt-3 mx-auto" style="max-width:700px;">We believe everyone deserves a clear, data-driven path to a career they love — not guesswork.</p>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <h2 class="section-title">Our Mission</h2>
+        <p class="text-muted">AI Personal Career Coach was built to remove the guesswork from career planning. Students and job seekers often don't know which roles truly fit their skills and interests, or what's missing between where they are and where they want to be. We use AI-driven similarity matching, structured skill-gap analysis, and personalized roadmaps to close that gap.</p>
+      </div>
+      <div class="col-lg-6">
+        <h2 class="section-title">How Our AI Works</h2>
+        <p class="text-muted">Our recommendation engine vectorizes your skills and interests, then compares them against a curated dataset of 25+ career profiles using cosine similarity — the same mathematical technique used in modern search and recommendation systems — to surface the roles that fit you best.</p>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-5">
+      {% for icon, title, desc in [
+        ('bi-eye', 'Transparency', 'Every recommendation comes with a clear "why" explanation.'),
+        ('bi-shield-check', 'Privacy First', 'Your data is used only to power your own recommendations.'),
+        ('bi-graph-up', 'Continuous Growth', 'Roadmaps and skill tracking evolve as you progress.'),
+      ] %}
+      <div class="col-md-4">
+        <div class="feature-card p-4 text-center h-100 animate-on-scroll">
+          <div class="feature-icon-circle mx-auto mb-3"><i class="bi {{ icon }}"></i></div>
+          <h6 class="fw-bold">{{ title }}</h6>
+          <p class="text-muted small mb-0">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

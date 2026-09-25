@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Your Career Recommendations — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="hero-badge bg-light border" style="background:#eef2ff !important;color:var(--primary)!important;">Step 2 of 3</span>
+      <h2 class="section-title mt-3">Hi {{ assessment.name.split(' ')[0] }}, Here Are Your Top Career Matches</h2>
+      <p class="section-subtitle mx-auto">Based on your skills, interests, and goals — ranked by AI similarity score.</p>
+    </div>
+
+    <div class="row g-4">
+      {% for rec in recommendations %}
+      <div class="col-lg-4">
+        <div class="career-card p-4 h-100 animate-on-scroll position-relative">
+          {% if rec.rank == 1 %}
+          <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">🏆 Best Match</span>
+          {% endif %}
+          <h5 class="fw-bold mb-1">{{ rec.career_name }}</h5>
+          <p class="text-muted small mb-3">{{ rec.description }}</p>
+
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="match-badge">{{ rec.match_percentage }}%</span>
+            <span class="text-muted small">Match Score</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-primary" style="width: {{ rec.match_percentage }}%;"></div>
+          </div>
+
+          <ul class="list-unstyled small mb-3">
+            <li class="mb-2"><i class="bi bi-cash-coin text-success me-2"></i><strong>Salary:</strong> {{ rec.salary_range }}</li>
+            <li class="mb-2"><i class="bi bi-graph-up-arrow text-primary me-2"></i><strong>Future Demand:</strong> {{ rec.future_demand }}</li>
+          </ul>
+
+          <div class="alert alert-light border small mb-3"><i class="bi bi-lightbulb text-warning me-1"></i>{{ rec.reason }}</div>
+
+          <div class="d-grid gap-2">
+            <a href="{{ url_for('main.skill_gap', assessment_id=assessment.id, career_name=rec.career_name) }}" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-bar-chart-steps me-1"></i>View Skill Gap
+            </a>
+            <a href="{{ url_for('main.roadmap', assessment_id=assessment.id, career_name=rec.career_name) }}" class="btn btn-primary-custom btn-sm">
+              <i class="bi bi-map me-1"></i>Get Learning Roadmap
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary">Go to Dashboard <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

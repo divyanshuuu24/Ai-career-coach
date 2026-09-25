@@ -1,0 +1,42 @@
+skill,priority,certification,project_idea
+python,High,PCEP - Certified Entry-Level Python Programmer,Build a CLI-based expense tracker
+machine learning,High,Coursera Machine Learning Specialization (Andrew Ng),Build a house price prediction model
+deep learning,High,DeepLearning.AI TensorFlow Developer Certificate,Build an image classifier with CNNs
+sql,High,Microsoft DA-100 / SQL for Data Analysis (Udacity),Design and query a movie ratings database
+statistics,Medium,Google Data Analytics Certificate,Analyze a public dataset and publish findings
+data visualization,Medium,Tableau Desktop Specialist,Build an interactive sales dashboard
+pandas,Medium,DataCamp Pandas Certification,Clean and analyze a real-world CSV dataset
+numpy,Low,DataCamp NumPy Course,Implement basic linear algebra operations
+tensorflow,High,TensorFlow Developer Certificate,Train a neural network on MNIST
+pytorch,High,PyTorch for Deep Learning (Udacity),Build a sentiment analysis model
+javascript,High,JavaScript Algorithms (freeCodeCamp),Build a to-do list web app
+react,High,Meta React Developer Certificate,Build a portfolio website with React
+node.js,High,OpenJS Node.js Certification,Build a REST API with Express
+html,Medium,freeCodeCamp Responsive Web Design,Build a personal landing page
+css,Medium,freeCodeCamp Responsive Web Design,Style a responsive multi-page site
+git,Medium,GitHub Foundations Certificate,Contribute to an open-source project
+rest api,Medium,Postman API Fundamentals,Build and document a REST API
+docker,High,Docker Certified Associate,Containerize a web application
+kubernetes,High,Certified Kubernetes Administrator (CKA),Deploy a multi-container app on Kubernetes
+aws,High,AWS Certified Cloud Practitioner,Deploy a static site using S3 and CloudFront
+azure,High,Microsoft Azure Fundamentals (AZ-900),Deploy a web app on Azure App Service
+linux,Medium,CompTIA Linux+,Set up and secure a Linux server
+networking,Medium,CompTIA Network+,Configure a small office network in a simulator
+ethical hacking,High,Certified Ethical Hacker (CEH),Perform a penetration test on a lab environment
+cryptography,Medium,Coursera Cryptography I (Stanford),Implement a basic encryption tool
+figma,Medium,Figma Academy Certificate,Redesign a popular app's UI
+ui/ux,Medium,Google UX Design Certificate,Design a mobile app prototype end-to-end
+communication,Low,Toastmasters / Coursera Effective Communication,Present a project to a mock stakeholder audience
+agile,Medium,PSM I - Professional Scrum Master,Run a mock sprint planning session
+excel,Low,Microsoft Excel Expert Certification,Build a budgeting workbook with formulas
+power bi,Medium,Microsoft PL-300,Build an interactive Power BI report
+seo,Medium,Google SEO Fundamentals,Optimize a blog for search ranking
+c++,High,C++ Institute CPA Certification,Build a simple game using C++
+c#,Medium,Microsoft C# Certification,Build a console inventory system
+unity,Medium,Unity Certified Programmer,Build a 2D platformer game
+solidity,High,ConsenSys Blockchain Developer Bootcamp,Deploy a smart contract on a testnet
+selenium,Medium,Selenium WebDriver Certification,Automate tests for a sample web app
+cloud computing,High,AWS Certified Solutions Architect,Migrate a sample app to the cloud
+nlp,High,NLP Specialization (DeepLearning.AI),Build a text summarization tool
+computer vision,High,OpenCV Certified Course,Build a face detection app
+leadership,Low,Coursera Leadership Principles,Lead a small team project to completion

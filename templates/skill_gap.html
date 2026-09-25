@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Skill Gap Analysis — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Skill Gap Analysis: <span class="text-gradient">{{ career.career_name }}</span></h2>
+      <p class="section-subtitle mx-auto">Here's how your current skills compare to what this role requires.</p>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="dash-stat-card text-center">
+          <i class="bi bi-check2-circle fs-1 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ result.existing_skills|length }}</h3>
+          <small>Skills You Have</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="dash-stat-card warm text-center">
+          <i class="bi bi-exclamation-triangle fs-1 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ result.missing_skills|length }}</h3>
+          <small>Skills to Learn</small>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="dash-stat-card teal text-center">
+          <i class="bi bi-pie-chart fs-1 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ result.coverage_percent }}%</h3>
+          <small>Skill Coverage</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h5 class="fw-bold mb-3"><i class="bi bi-check-circle text-success me-2"></i>Skills You Already Have</h5>
+          {% if result.existing_skills %}
+            {% for s in result.existing_skills %}
+              <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle p-2 me-2 mb-2">{{ s }}</span>
+            {% endfor %}
+          {% else %}
+            <p class="text-muted small">No direct overlaps yet — that's okay, your roadmap will help you build these from scratch!</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h5 class="fw-bold mb-3"><i class="bi bi-x-circle text-danger me-2"></i>Missing Skills &amp; Recommendations</h5>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>Priority</th>
+                  <th>Certification</th>
+                  <th>Project Idea</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in result.missing_skills %}
+                <tr>
+                  <td class="fw-semibold text-capitalize">{{ item.skill }}</td>
+                  <td>
+                    <span class="badge badge-priority-{{ item.priority|lower }}">{{ item.priority }}</span>
+                  </td>
+                  <td class="small">{{ item.certification }}</td>
+                  <td class="small">{{ item.project }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="{{ url_for('main.roadmap', assessment_id=assessment.id, career_name=career.career_name) }}" class="btn btn-primary-custom px-4">
+        <i class="bi bi-map me-1"></i> Build My Learning Roadmap
+      </a>
+      <a href="{{ url_for('main.recommendation', assessment_id=assessment.id) }}" class="btn btn-outline-secondary px-4 ms-2">Back to Recommendations</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

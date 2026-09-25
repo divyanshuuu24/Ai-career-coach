@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# Database
+instance/*.db
+
+# Uploads (resumes are deleted after analysis, but ignore any strays)
+uploads/*
+!uploads/.gitkeep
+!instance/.gitkeep

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Contact — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container" style="max-width: 700px;">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle mx-auto">Have questions or feedback? We'd love to hear from you.</p>
+    </div>
+
+    <form method="POST" class="glass-card p-4 p-md-5 needs-validation animate-on-scroll" novalidate>
+      <div class="mb-3">
+        <label class="form-label">Your Name</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Message</label>
+        <textarea name="message" rows="5" class="form-control" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary-custom w-100">Send Message</button>
+    </form>
+
+    <div class="row text-center g-4 mt-4">
+      <div class="col-md-4"><i class="bi bi-envelope fs-3 text-primary"></i><p class="small text-muted mt-2 mb-0">support@aicareercoach.com</p></div>
+      <div class="col-md-4"><i class="bi bi-telephone fs-3 text-primary"></i><p class="small text-muted mt-2 mb-0">+91 96991 94968</p></div>
+      <div class="col-md-4"><i class="bi bi-geo-alt fs-3 text-primary"></i><p class="small text-muted mt-2 mb-0">Mumbai, India</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

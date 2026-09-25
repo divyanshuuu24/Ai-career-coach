@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Career Assessment — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container" style="max-width: 800px;">
+    <div class="text-center mb-5">
+      <span class="hero-badge bg-light text-primary border" style="background:#eef2ff !important;color:var(--primary)!important;">Step 1 of 3</span>
+      <h2 class="section-title mt-3">Career Assessment</h2>
+      <p class="section-subtitle mx-auto">Tell us about yourself so our AI can find the careers that truly fit you.</p>
+    </div>
+
+    <div class="glass-card p-4 p-md-5 shadow-sm animate-on-scroll">
+      <form method="POST" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-control" value="{{ form.name or '' }}" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Age *</label>
+            <input type="number" name="age" min="10" max="100" class="form-control" value="{{ form.age or '' }}" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Gender</label>
+            <select name="gender" class="form-select">
+              <option value="">Select</option>
+              <option {% if form.gender == 'Male' %}selected{% endif %}>Male</option>
+              <option {% if form.gender == 'Female' %}selected{% endif %}>Female</option>
+              <option {% if form.gender == 'Other' %}selected{% endif %}>Other</option>
+              <option {% if form.gender == 'Prefer not to say' %}selected{% endif %}>Prefer not to say</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Education Level *</label>
+            <select name="education" class="form-select" required>
+              <option value="">Select</option>
+              {% for level in ['High School', "Bachelor's Degree", "Master's Degree", "PhD", "Diploma", "Self-Taught"] %}
+              <option {% if form.education == level %}selected{% endif %}>{{ level }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">College / University</label>
+            <input type="text" name="college" class="form-control" value="{{ form.college or '' }}" placeholder="e.g. State University">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Current Skills * <small class="text-muted">(comma-separated, e.g. python, sql, communication)</small></label>
+            <textarea name="current_skills" class="form-control" rows="2" required>{{ form.current_skills or '' }}</textarea>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Interests <small class="text-muted">(comma-separated, e.g. data, design, marketing)</small></label>
+            <textarea name="interests" class="form-control" rows="2">{{ form.interests or '' }}</textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Preferred Industry</label>
+            <select name="preferred_industry" class="form-select">
+              <option value="">No preference</option>
+              {% for ind in ['Technology','Design','Management','Business','Marketing','Finance','Human Resources','Media'] %}
+              <option {% if form.preferred_industry == ind %}selected{% endif %}>{{ ind }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Experience Level</label>
+            <select name="experience_level" class="form-select">
+              {% for lvl in ['Student / No Experience','0-1 Years','1-3 Years','3-5 Years','5+ Years'] %}
+              <option {% if form.experience_level == lvl %}selected{% endif %}>{{ lvl }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Career Goal <small class="text-muted">(what do you want to achieve?)</small></label>
+            <textarea name="career_goal" class="form-control" rows="2">{{ form.career_goal or '' }}</textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary-custom w-100 mt-4">
+          <i class="bi bi-stars me-1"></i> Analyze My Profile with AI
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

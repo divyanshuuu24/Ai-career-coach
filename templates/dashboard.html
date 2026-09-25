@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container">
+    <div class="mb-4">
+      <h2 class="fw-bold mb-1">Welcome back, {{ current_user.full_name.split(' ')[0] }} 👋</h2>
+      <p class="text-muted">Here's a snapshot of your career journey so far.</p>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-3 col-6">
+        <div class="dash-stat-card animate-on-scroll">
+          <i class="bi bi-bullseye fs-2 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ top_match_score }}%</h3>
+          <small>Top Career Match</small>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="dash-stat-card green animate-on-scroll">
+          <i class="bi bi-check2-circle fs-2 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ acquired_count }}</h3>
+          <small>Skills Completed</small>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="dash-stat-card warm animate-on-scroll">
+          <i class="bi bi-hourglass-split fs-2 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ missing_count }}</h3>
+          <small>Skills Remaining</small>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="dash-stat-card teal animate-on-scroll">
+          <i class="bi bi-robot fs-2 mb-2"></i>
+          <h3 class="fw-bold mb-0">{{ chat_count }}</h3>
+          <small>AI Chat Sessions</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Skills Chart -->
+      <div class="col-lg-5">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3">Skill Progress</h6>
+          {% if acquired_count or missing_count %}
+            <canvas id="skillsChart" height="220"></canvas>
+          {% else %}
+            <p class="text-muted small">Complete a Skill Gap Analysis to see your progress here.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Recommended Careers -->
+      <div class="col-lg-7">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3">Recommended Careers</h6>
+          {% if recommendations %}
+          <canvas id="matchChart" height="220" class="mb-3"></canvas>
+          <div class="d-flex flex-wrap gap-2">
+            {% for rec in recommendations %}
+            <a href="{{ url_for('main.skill_gap', assessment_id=latest_assessment.id, career_name=rec.career_name) }}" class="btn btn-outline-primary btn-sm">{{ rec.career_name }} · {{ rec.match_percentage }}%</a>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="text-muted small">You haven't taken the Career Assessment yet.</p>
+          <a href="{{ url_for('main.assessment') }}" class="btn btn-primary-custom btn-sm">Take Assessment</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Activity History -->
+      <div class="col-lg-6">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3">Activity History</h6>
+          {% if activity %}
+          <ul class="list-unstyled">
+            {% for a in activity %}
+            <li class="d-flex justify-content-between border-bottom py-2 small">
+              <span><i class="bi bi-dot text-primary"></i>{{ a.detail }}</span>
+              <span class="text-muted">{{ a.date.strftime('%b %d, %Y') }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="text-muted small">No activity yet — start with a Career Assessment!</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Roadmaps -->
+      <div class="col-lg-6">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3">Your Learning Roadmaps</h6>
+          {% if roadmaps %}
+          {% for rm in roadmaps %}
+          <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+            <div>
+              <strong class="small">{{ rm.target_career }}</strong>
+              <div class="progress mt-1" style="width: 180px;">
+                <div class="progress-bar bg-primary" style="width: {{ rm.progress_percent }}%;"></div>
+              </div>
+            </div>
+            <a href="{{ url_for('main.roadmap', assessment_id=latest_assessment.id, career_name=rm.target_career) }}" class="btn btn-sm btn-outline-secondary">View</a>
+          </div>
+          {% endfor %}
+          {% else %}
+          <p class="text-muted small">No roadmaps generated yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+{% if acquired_count or missing_count %}
+new Chart(document.getElementById('skillsChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Skills Completed', 'Skills Remaining'],
+    datasets: [{
+      data: [{{ acquired_count }}, {{ missing_count }}],
+      backgroundColor: ['#10b981', '#f59e0b'],
+      borderWidth: 0,
+    }]
+  },
+  options: { plugins: { legend: { position: 'bottom' } } }
+});
+{% endif %}
+
+{% if recommendations %}
+new Chart(document.getElementById('matchChart'), {
+  type: 'bar',
+  data: {
+    labels: [{% for rec in recommendations %}"{{ rec.career_name }}",{% endfor %}],
+    datasets: [{
+      label: 'Match %',
+      data: [{% for rec in recommendations %}{{ rec.match_percentage }},{% endfor %}],
+      backgroundColor: '#4f46e5',
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, max: 100 } }
+  }
+});
+{% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Resume Analyzer — AI Career Coach{% endblock %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="container" style="max-width: 850px;">
+    <div class="text-center mb-5">
+      <h2 class="section-title">AI Resume Analyzer</h2>
+      <p class="section-subtitle mx-auto">Upload your resume (PDF) and get an instant AI-powered score with actionable feedback.</p>
+    </div>
+
+    {% if not analyzed %}
+    <form method="POST" enctype="multipart/form-data" class="glass-card p-4 p-md-5 animate-on-scroll">
+      <label id="uploadDropzone" class="upload-dropzone d-block mb-3">
+        <i class="bi bi-cloud-arrow-up fs-1 text-primary"></i>
+        <p class="fw-semibold mb-1 mt-2">Click or drag &amp; drop your resume here</p>
+        <p class="text-muted small mb-0" id="fileNameLabel">PDF files only, max 5MB</p>
+      </label>
+      <input type="file" id="resume_file" name="resume_file" accept=".pdf" class="d-none" required>
+      <button type="submit" class="btn btn-primary-custom w-100"><i class="bi bi-stars me-1"></i>Analyze My Resume</button>
+    </form>
+    {% else %}
+    <div class="glass-card p-4 p-md-5 mb-4 text-center animate-on-scroll">
+      <h6 class="text-muted mb-1">Resume Score for {{ filename }}</h6>
+      <h1 class="fw-bold text-gradient display-3">{{ result.resume_score }}<span class="fs-3">/100</span></h1>
+      <div class="progress mx-auto mt-3" style="max-width:400px;">
+        <div class="progress-bar bg-primary" style="width: {{ result.resume_score }}%;"></div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3"><i class="bi bi-check-circle text-success me-2"></i>Detected Skills ({{ result.detected_skills|length }})</h6>
+          {% for s in result.detected_skills %}
+            <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle p-2 me-2 mb-2">{{ s }}</span>
+          {% else %}
+            <p class="text-muted small">No common technical skills detected — consider adding a dedicated Skills section.</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3"><i class="bi bi-exclamation-circle text-danger me-2"></i>Missing Resume Sections</h6>
+          {% for k in result.missing_keywords %}
+            <span class="badge rounded-pill bg-danger-subtle text-danger border border-danger-subtle p-2 me-2 mb-2 text-capitalize">{{ k }}</span>
+          {% else %}
+            <p class="text-muted small">Great! Your resume includes all standard sections.</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3"><i class="bi bi-lightbulb text-warning me-2"></i>Suggestions to Improve</h6>
+          <ul class="small text-muted mb-0">
+            {% for s in result.suggestions %}<li class="mb-2">{{ s }}</li>{% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="glass-card p-4 h-100 animate-on-scroll">
+          <h6 class="fw-bold mb-3"><i class="bi bi-briefcase text-primary me-2"></i>Suggested Job Roles</h6>
+          {% for role in result.suggested_roles %}
+            <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary-subtle p-2 me-2 mb-2">{{ role }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ url_for('resume.resume_analyzer') }}" class="btn btn-outline-primary px-4">Analyze Another Resume</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

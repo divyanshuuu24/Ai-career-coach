@@ -1,0 +1,237 @@
+/* =========================================================
+   AI Career Coach — Global Stylesheet
+   Modern, professional theme with gradients + soft animations
+   ========================================================= */
+
+:root {
+  --primary: #4f46e5;      /* Indigo */
+  --primary-dark: #3730a3;
+  --secondary: #06b6d4;    /* Cyan */
+  --accent: #f59e0b;       /* Amber */
+  --success: #10b981;
+  --danger: #ef4444;
+  --dark-bg: #0f172a;
+  --light-bg: #f8fafc;
+  --card-radius: 16px;
+  --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --shadow-soft: 0 10px 30px rgba(79, 70, 229, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  background-color: var(--light-bg);
+  color: #1e293b;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -0.02em; }
+
+a { text-decoration: none; }
+
+/* ---------------- Navbar ---------------- */
+.main-navbar {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4f46e5 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  padding: 0.75rem 0;
+}
+.main-navbar .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  font-weight: 500;
+  transition: color .2s ease;
+}
+.main-navbar .nav-link:hover { color: #fff !important; }
+.main-navbar .navbar-brand { color: #fff; font-size: 1.35rem; }
+
+.btn-gradient {
+  background: var(--gradient-warm);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.4); color: #fff; }
+
+.btn-primary-custom {
+  background: var(--gradient-primary);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 0.7rem 1.8rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-primary-custom:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); color: #fff; }
+
+/* ---------------- Hero ---------------- */
+.hero-section {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #4f46e5 100%);
+  color: #fff;
+  padding: 7rem 0 8rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-section::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(6,182,212,0.35), transparent 45%),
+              radial-gradient(circle at 10% 80%, rgba(245,158,11,0.25), transparent 40%);
+  pointer-events: none;
+}
+.hero-section h1 { font-size: 3rem; }
+.hero-badge {
+  display: inline-block; padding: 0.4rem 1rem; border-radius: 50px;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(6px);
+  font-size: 0.85rem; font-weight: 500; letter-spacing: .03em;
+}
+.hero-illustration {
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-18px); }
+}
+
+/* ---------------- Sections ---------------- */
+.section-padding { padding: 5rem 0; }
+.section-title { font-size: 2.2rem; margin-bottom: .75rem; }
+.section-subtitle { color: #64748b; max-width: 640px; margin: 0 auto; }
+
+/* ---------------- Cards ---------------- */
+.feature-card, .glass-card, .career-card, .step-card, .testimonial-card, .stat-card {
+  border-radius: var(--card-radius);
+  border: 1px solid rgba(148,163,184,0.15);
+  background: #fff;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.feature-card:hover, .career-card:hover, .testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-soft);
+}
+.feature-icon-circle {
+  width: 62px; height: 62px; border-radius: 18px;
+  background: var(--gradient-primary);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.6rem;
+}
+.step-number {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--gradient-warm); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1.1rem;
+}
+
+.match-badge {
+  font-size: 1.5rem; font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.card-hover-fade { animation: fadeInUp .6s ease both; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- Auth pages ---------------- */
+.auth-wrapper {
+  min-height: 85vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #eef2ff 0%, #ecfeff 100%);
+  padding: 3rem 1rem;
+}
+.auth-card {
+  max-width: 460px; width: 100%;
+  background: #fff; border-radius: 20px; padding: 2.5rem;
+  box-shadow: 0 20px 50px rgba(79,70,229,0.15);
+}
+
+/* ---------------- Dashboard ---------------- */
+.dash-stat-card {
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  color: #fff;
+  background: var(--gradient-primary);
+  box-shadow: var(--shadow-soft);
+}
+.dash-stat-card.warm { background: var(--gradient-warm); }
+.dash-stat-card.teal { background: linear-gradient(135deg,#06b6d4,#0891b2); }
+.dash-stat-card.green { background: linear-gradient(135deg,#10b981,#059669); }
+
+.progress { border-radius: 50px; height: 10px; background: #e2e8f0; }
+.progress-bar { border-radius: 50px; }
+
+/* ---------------- Chatbot ---------------- */
+.chat-window {
+  height: 480px; overflow-y: auto;
+  background: #f1f5f9; border-radius: 16px; padding: 1.25rem;
+}
+.chat-bubble {
+  max-width: 75%; padding: 0.75rem 1.1rem; border-radius: 16px;
+  margin-bottom: 0.75rem; line-height: 1.5; animation: fadeInUp .3s ease both;
+}
+.chat-bubble.user {
+  background: var(--gradient-primary); color: #fff; margin-left: auto; border-bottom-right-radius: 4px;
+}
+.chat-bubble.bot {
+  background: #fff; border: 1px solid #e2e8f0; margin-right: auto; border-bottom-left-radius: 4px;
+}
+.typing-dots span {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: #94a3b8; margin: 0 2px; animation: blink 1.2s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2) { animation-delay: .2s; }
+.typing-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
+
+/* ---------------- Analysis loading ---------------- */
+.analyzing-spinner {
+  width: 90px; height: 90px; border-radius: 50%;
+  border: 6px solid #e2e8f0; border-top-color: var(--primary);
+  animation: spin 1s linear infinite; margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------------- Roadmap timeline ---------------- */
+.roadmap-timeline { position: relative; padding-left: 2.5rem; }
+.roadmap-timeline::before {
+  content: ""; position: absolute; left: 14px; top: 0; bottom: 0; width: 3px;
+  background: var(--gradient-primary); border-radius: 3px;
+}
+.roadmap-month {
+  position: relative; margin-bottom: 2rem;
+}
+.roadmap-month::before {
+  content: ""; position: absolute; left: -2.5rem; top: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gradient-primary); border: 4px solid #fff; box-shadow: 0 0 0 3px var(--primary);
+}
+
+/* ---------------- Badges ---------------- */
+.badge-priority-high { background: #fee2e2; color: #b91c1c; }
+.badge-priority-medium { background: #fef3c7; color: #92400e; }
+.badge-priority-low { background: #dcfce7; color: #166534; }
+
+/* ---------------- Footer ---------------- */
+.footer-section { background: var(--dark-bg); }
+.footer-links li { margin-bottom: .5rem; }
+.footer-links a { color: rgba(255,255,255,0.75); transition: color .2s ease; }
+.footer-links a:hover { color: #fff; }
+
+/* ---------------- Utility ---------------- */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.upload-dropzone {
+  border: 2px dashed #c7d2fe; border-radius: 16px; padding: 3rem 1.5rem;
+  text-align: center; background: #f5f7ff; transition: all .2s ease; cursor: pointer;
+}
+.upload-dropzone:hover, .upload-dropzone.dragover { background: #eef2ff; border-color: var(--primary); }
+
+@media (max-width: 768px) {
+  .hero-section h1 { font-size: 2.1rem; }
+  .hero-section { padding: 4.5rem 0 5rem; }
+}
